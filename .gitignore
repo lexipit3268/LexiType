@@ -48,3 +48,4 @@ frontend/.env.production
 docs/build/
 docs/dist/
 docs/.docusaurus/
+docs/temp/
