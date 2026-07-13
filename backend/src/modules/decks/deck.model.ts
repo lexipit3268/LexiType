@@ -38,4 +38,4 @@ const DeckSchema = new Schema(
   },
 );
 
-export default mongoose.model<IDeck>('Deck', DeckSchema);
+export default mongoose.model<IDeck>('Deck', DeckSchema, 'Decks');
