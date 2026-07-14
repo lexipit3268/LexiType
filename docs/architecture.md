@@ -12,7 +12,7 @@ Dùng Swagger để test api
 
 Mỗi document đại diện cho một chủ đề hoặc một cấp độ từ vựng. Mongoose sẽ tự động quản lý thời gian tạo qua option `{ timestamps: true }`.
 
-- **`deckID`**: `String` (Khóa chính độc lập, chuỗi định danh duy nhất ví dụ: `deck_b2_academic`, `unique: true`)
+- **`_id`**: `String` (Khóa chính độc lập, chuỗi định danh duy nhất)
 - **`title`**: `String` (Ví dụ: "B2 Academic Word-Form", `required: true`)
 - **`description`**: `String` (Mô tả ngắn gọn về bộ từ vựng)
 - **`slug`**: `String` (Dùng cho URL thân thiện, ví dụ: `b2-academic-word-form`, `unique: true`)

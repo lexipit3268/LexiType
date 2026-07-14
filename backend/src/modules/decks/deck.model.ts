@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IDeck extends Document {
-  deckID: string;
   title: string;
   description: string;
   slug: string;
@@ -10,11 +9,6 @@ export interface IDeck extends Document {
 
 const DeckSchema = new Schema(
   {
-    deckID: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     title: {
       type: String,
       required: true,
@@ -38,4 +32,12 @@ const DeckSchema = new Schema(
   },
 );
 
+DeckSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (doc, ret: Record<string, any>) => {
+    delete ret._id;
+    return ret;
+  },
+});
 export default mongoose.model<IDeck>('Deck', DeckSchema, 'Decks');

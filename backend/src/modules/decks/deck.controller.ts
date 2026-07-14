@@ -23,8 +23,19 @@ export const createDeck = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const getDeck = asyncHandler(async (req: Request, res: Response) => {
-  const { deckID } = req.params;
-  const deck = await deckService.getDeckById(String(deckID));
+  const { id } = req.params;
+  const deck = await deckService.getDeckById(String(id));
+
+  if (!deck) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Không tìm thấy bộ từ vựng này!');
+  }
+
+  res.status(StatusCodes.OK).json({ success: true, data: deck });
+});
+
+export const getDeckBySlug = asyncHandler(async (req: Request, res: Response) => {
+  const { slug } = req.params;
+  const deck = await deckService.getDeckBySlug(String(slug));
 
   if (!deck) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Không tìm thấy bộ từ vựng này!');
@@ -34,10 +45,10 @@ export const getDeck = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const updateDeck = asyncHandler(async (req: Request, res: Response) => {
-  const { deckID } = req.params;
+  const { id } = req.params;
   const updateData = req.body;
 
-  const updatedDeck = await deckService.updateOne(String(deckID), updateData);
+  const updatedDeck = await deckService.updateOne(String(id), updateData);
 
   if (!updatedDeck) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Không tìm thấy bộ từ vựng để cập nhật!');
@@ -47,8 +58,8 @@ export const updateDeck = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const deleteDeck = asyncHandler(async (req: Request, res: Response) => {
-  const { deckID } = req.params;
-  const deletedDeck = await deckService.deleteOne(String(deckID));
+  const { id } = req.params;
+  const deletedDeck = await deckService.deleteOne(String(id));
 
   if (!deletedDeck) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Không tìm thấy bộ từ vựng để xóa!');
