@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import { setupSwagger } from './src/core/swagger.js';
 import { config } from './src/config/index.js';
 import { connectDB } from './src/core/database.js';
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use(`${config.api.prefix}`, router);
