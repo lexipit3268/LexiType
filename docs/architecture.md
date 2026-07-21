@@ -17,6 +17,7 @@ Mỗi document đại diện cho một chủ đề hoặc một cấp độ từ
 - **`description`**: `String` (Mô tả ngắn gọn về bộ từ vựng)
 - **`slug`**: `String` (Dùng cho URL thân thiện, ví dụ: `b2-academic-word-form`, `unique: true`)
 - **`isPublic`**: `Boolean` (Mặc định `true`, bộ từ do hệ thống tạo công khai)
+- **`ownerID`**: `ObjectID`
 - **`createdAt`**: `Date` (Do Mongoose tự động sinh)
 - **`updatedAt`**: `Date` (Do Mongoose tự động sinh)
 
