@@ -29,6 +29,7 @@ export const RegisterSchema = z
         example: 'Nguyen Van A',
       }),
   })
+  .strict()
   .openapi('RegisterRequest');
 
 export const LoginSchema = z
@@ -41,3 +42,9 @@ export const LoginSchema = z
     password: z.string({ message: 'Mật khẩu là bắt buộc' }).openapi({ example: '123456' }),
   })
   .openapi('LoginRequest');
+
+export const fullNameSchema = z
+  .object({
+    fullName: z.string({ message: 'Họ tên phải đầy đủ' }).openapi({ example: 'Nguyễn Văn Thị' }),
+  })
+  .openapi('fullNameSchema');

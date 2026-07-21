@@ -19,7 +19,8 @@ export const createUser = async (payload: Partial<IUser>) => {
   const hashedPassword = await bcrypt.hash(payload.password as string, salt);
 
   const newUser = new User({
-    ...payload,
+    email: payload.email,
+    fullName: payload.fullName,
     password: hashedPassword,
   });
 

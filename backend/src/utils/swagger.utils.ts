@@ -6,6 +6,7 @@ export const registerApiDoc = (
   summary: string,
   tag: string,
   schema?: any,
+  isSecure: boolean = false,
 ) => {
   registry.registerPath({
     method,
@@ -23,6 +24,7 @@ export const registerApiDoc = (
         ]
       : undefined,
     request: schema ? { body: { content: { 'application/json': { schema } } } } : undefined,
+    security: isSecure ? [{ BearerAuth: [] }] : undefined,
     responses: {
       200: { description: 'Success' },
       201: { description: 'Created' },

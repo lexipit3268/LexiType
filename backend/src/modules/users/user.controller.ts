@@ -1,7 +1,8 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as userService from './user.service.js';
 import { asyncHandler } from '../../core/asyncHandler.js';
+import { ApiError } from '../../core/ApiError.js';
 
 export const register = asyncHandler(async (req: Request, res: Response) => {
   const userData = req.body;
@@ -63,15 +64,19 @@ export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-export const updateFullName = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { fullName } = req.body;
+export const updateFullName = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    if (!req.body || !req.body.fullName) {
+      return next(new ApiError(StatusCodes.BAD_REQUEST, 'Họ tên mới không được để trống'));
+    }
+    const { fullName } = req.body;
+    const updatedUser = await userService.updateFullName(String(id), fullName);
 
-  const updatedUser = await userService.updateFullName(String(id), fullName);
-
-  res.status(StatusCodes.OK).json({
-    success: true,
-    message: 'Cập nhật họ tên thành công!',
-    data: updatedUser,
-  });
-});
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'Cập nhật họ tên thành công!',
+      data: updatedUser,
+    });
+  },
+);

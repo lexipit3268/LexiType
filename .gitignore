@@ -49,3 +49,5 @@ docs/build/
 docs/dist/
 docs/.docusaurus/
 docs/temp/
+
+seed.ts
