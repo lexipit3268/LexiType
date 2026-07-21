@@ -1,9 +1,10 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
 
 export interface IDeck extends Document {
   title: string;
   description: string;
   slug: string;
+  ownerId: Types.ObjectId;
   isPublic: boolean;
 }
 
@@ -25,6 +26,11 @@ const DeckSchema = new Schema(
     isPublic: {
       type: Boolean,
       default: true,
+    },
+    ownerId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Users',
+      required: true,
     },
   },
   {

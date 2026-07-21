@@ -3,8 +3,11 @@ import { DeckController, DeckSchema } from './index.js';
 import { validate } from '../../middlewares/validate.middleware.js';
 import { registerApiDoc } from '../../utils/swagger.utils.js';
 import { config } from '../../config/index.js';
+import { protect } from '../../middlewares/auth.middleware.js';
 
 const router = Router();
+
+router.use(protect);
 
 registerApiDoc('get', `${config.api.prefix}/decks`, 'Lấy danh sách bộ từ', 'Decks');
 registerApiDoc('post', `${config.api.prefix}/decks`, 'Tạo bộ từ mới', 'Decks', DeckSchema);
